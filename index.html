@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moe Kyaw Aung | Time Engineer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a12;
+            --bg-secondary: #12121f;
+            --accent: #00f0ff;
+            --accent2: #ff6b35;
+            --accent3: #9b59b6;
+            --text: #e0e0ff;
+            --dim: #8888aa;
+            --error: #ff4757;
+            --success: #2ed573;
+            --warning: #ffa502;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Time Navigation */
+        .time-navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.3rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(155, 89, 182, 0.05), transparent 50%);
+            pointer-events: none;
+        }
+
+        .chronograph-ring {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 240, 255, 0.2), transparent 30%, transparent);
+            animation: chronoSpin 8s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes chronoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #fff, var(--accent), var(--accent3), #fff);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textFlow 5s ease-in-out infinite;
+        }
+
+        @keyframes textFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--dim);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 2rem;
+        }
+
+        .hero-cta a {
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            animation: pulse 2s ease infinite;
+        }
+
+        .hero-cta a:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
+            animation: none;
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Chronograph Watches */
+        .chronograph-display {
+            display: flex;
+            gap: 60px;
+            margin-top: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0 2rem;
+        }
+
+        .watch {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            box-shadow: 
+                0 0 30px rgba(0, 240, 255, 0.1),
+                inset 0 0 30px rgba(0, 240, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .watch:hover {
+            transform: scale(1.1);
+        }
+
+        .watch-inner {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .watch-digit {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .watch-label {
+            font-size: 0.7rem;
+            color: var(--dim);
+            letter-spacing: 2px;
+        }
+
+        .watch-hand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40%;
+            height: 2px;
+            background: var(--accent);
+            transform-origin: left center;
+            animation: tick 1s linear infinite;
+        }
+
+        @keyframes tick {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 3px;
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--accent3), var(--accent2));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            position: relative;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 50%;
+            border: 4px solid var(--about-bg);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+            transform: translateX(100%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+            transform: translateX(-100%);
+        }
+
+        .timeline-date {
+            font-family: 'Orbitron', monospace;
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-desc {
+            color: var(--dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .timeline-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            border-radius: 25px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Project Time Capsules */
+        .projects-section {
+            padding: 5rem 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .capsule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .time-capsule {
+            background: var(--bg-primary);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .time-capsule::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .time-capsule:hover::before {
+            opacity: 1;
+        }
+
+        .time-capsule:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.15);
+            border-color: var(--accent);
+        }
+
+        .capsule-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .capsule-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .capsule-desc {
+            color: var(--dim);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .capsule-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .capsule-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .capsule-links a:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .capsule-year {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            color: var(--dim);
+        }
+
+        /* Timeline Scrubber */
+        .scrubber-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            display: none;
+        }
+
+        .scrubber-track {
+            position: relative;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .scrubber-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent3));
+            width: 0%;
+            transition: width 0.3s ease;
+            opacity: 0.3;
+        }
+
+        .scrubber-handle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: left 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+
+        .scrubber-handle.dragging {
+            cursor: grabbing;
+        }
+
+        /* GitHub Accounts Section */
+        .github-section {
+            padding: 5rem 2rem;
+        }
+
+        .github-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .github-item {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .github-item:hover {
+            border-color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .github-item a {
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            word-break: break-word;
+        }
+
+        /* Email Section */
+        .email-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .email-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .email-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .email-item:hover {
+            background: rgba(0, 240, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .email-item a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-break: break-word;
+        }
+
+        /* Time Navigator AI */
+        .ai-assistant {
+            position: fixed;
+            right: -400px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 380px;
+            height: 600px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            z-index: 2000;
+            transition: right 0.5s ease;
+            box-shadow: -20px 0 50px rgba(0, 240, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .ai-assistant.open {
+            right: 0;
+        }
+
+        .ai-header {
+            padding: 1.5rem;
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.1), transparent);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: pulse 2s ease infinite;
+        }
+
+        .ai-name {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .ai-status {
+            color: var(--dim);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ai-status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        .ai-chat {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ai-message {
+            max-width: 85%;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-left-radius: 2px;
+        }
+
+        .ai-message.bot {
+            align-self: flex-start;
+            border-left: 3px solid var(--accent);
+        }
+
+        .ai-message.user {
+            align-self: flex-end;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-bottom-right-radius: 2px;
+        }
+
+        .ai-input-area {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .ai-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .ai-input:focus {
+            outline: 2px solid var(--accent);
+            border-color: var(--accent);
+        }
+
+        .ai-send {
+            padding: 0.8rem;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            color: var(--bg-primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .ai-send:hover {
+            transform: scale(1.1);
+        }
+
+        .ai-toggle {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--bg-primary);
+            z-index: 2001;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            animation: pulse 2s ease infinite;
+        }
+
+        .ai-toggle:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 60px rgba(0, 240, 255, 0.8);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 2rem;
+            background: var(--bg-primary);
+        }
+
+        .contact-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1.2rem;
+            color: var(--dim);
+            margin-bottom: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            background: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            min-width: 300px;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--accent);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-label {
+            color: var(--dim);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-value {
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+        }
+
+        .contact-value a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Links */
+        .social-section {
+            padding: 5rem 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .social-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.4s ease;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            background: var(--bg-primary);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copy {
+            color: var(--dim);
+            font-size: 0.9rem;
+        }
+
+        .footer-copy span {
+            color: var(--accent);
+        }
+
+        /* Scroll Effects */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .chronograph-display {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-item::before,
+            .timeline-content::before {
+                display: none;
+            }
+
+            .ai-assistant {
+                width: 100%;
+                border-radius: 0;
+                right: -100%;
+                height: 80vh;
+                bottom: 0;
+                top: 10vh;
+                transform: none;
+            }
+
+            .ai-assistant.open {
+                right: 0;
+            }
+
+            .capsule-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add ripple distortion effect for capsules */
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--accent);
+            transform: scale(0);
+            animation: ripple 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        /* Time warp hover overlay */
+        .time-capsule::after {
+            content: '⏳';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 1.5rem;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        .time-capsule:hover::after {
+            opacity: 1;
+        }
+
+        /* Video section */
+        .video-section {
+            padding: 5rem 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: var(--bg-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .video-card:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .video-card video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .video-meta {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: var(--dim);
+        }
+
+        /* Achievement section */
+        .achievement-section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .odometer {
+            font-size: 4rem;
+            font-family: 'Orbitron', monospace;
+            color: var(--accent-right);
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="time-navigation">
+        <div class="nav-brand">MK//TimeEngineer</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#github">GitHub</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-glow"></div>
+        <div class="chronograph-ring" style="top: 20%; left: 10%;"></div>
+        <div class="chronograph-ring" style="top: 60%; right: 10%; animation-delay: -4s;"></div>
+        
+        <h1 class="hero-title">Moe Kyaw Aung</h1>
+        <p class="hero-subtitle">TIME ENGINEER • FULL-STACK DEVELOPER • CREATIVE CODER</p>
+        
+        <div class="hero-cta">
+            <a href="#projects">View Projects</a>
+            <a href="#contact" style="border-color: var(--accent3);">Contact Me</a>
+        </div>
+
+        <!-- Chronograph Watches -->
+        <div class="chronograph-display">
+            <div class="watch">
+                <div class="watch-inner">
+                    <div class="watch-digit" id="yearsExp">6+</div>
+                    <div class="watch-label">YEARS</div>
+                </div>
+                <div class="watch-hand"></div>
+            </div>
+            <div class="watch">
+                <div class="watch-inner">
+                    <div class="watch-digit" id="projectsDone">30+</div>
+                    <div class="watch-label">PROJECTS</div>
+                </div>
+                <div class="watch-hand" style="animation-duration: 0.5s;"></div>
+            </div>
+            <div class="watch">
+                <div class="watch-inner">
+                    <div class="watch-digit" id="technologies">15+</div>
+                    <div class="watch-label">STACKS</div>
+                </div>
+                <div class="watch-hand" style="animation-duration: 2s;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section fade-in" id="timeline">
+        <h2 class="section-title">DEVELOPER <span>TIMELINE</span></h2>
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content" onclick="openCapsule(this)">
+                    <div class="timeline-date">2020</div>
+                    <div class="timeline-title">First Commit</div>
+                    <div class="timeline-desc">Started with HTML, CSS, and JavaScript basics. Built my first responsive website.</div>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content" onclick="openCapsule(this)">
+                    <div class="timeline-date">2021</div>
+                    <div class="timeline-title">Framework Exploration</div>
+                    <div class="timeline-desc">Delved into React and modern JavaScript. Began exploring Node.js and backend development.</div>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">ES6</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content" onclick="openCapsule(this)">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-title">Full-Stack Mastery</div>
+                    <div class="timeline-desc">Mastered full-stack development. Built complex applications with authentication, databases, and APIs.</div>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">jQuery</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content" onclick="openCapsule(this)">
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-title">Pro Level Projects</div>
+                    <div class="timeline-desc">Built 20+ production-ready apps including POS systems, social dashboards, and video players.</div>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Tailwind</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content" onclick="openCapsule(this)">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-title">PWA & Advanced Systems</div>
+                    <div class="timeline-desc">Developed Progressive Web Apps, game collections, and advanced POS systems with offline functionality.</div>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">PWA</span>
+                        <span class="tech-tag">Workbox</span>
+                        <span class="tech-tag">IndexedDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content" onclick="openCapsule(this)">
+                    <div class="timeline-date">2025</div>
+                    <div class="timeline-title">AI Integration</div>
+                    <div class="timeline-desc">Integrating AI into applications, building intelligent systems, and exploring cutting-edge technologies.</div>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">ChatGPT API</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Time Capsules Section -->
+    <section class="projects-section" id="projects">
+        <h2 class="section-title">TIME <span>CAPSULES</span></h2>
+        <div class="capsule-grid" id="capsuleGrid">
+            <!-- Projects will be dynamically injected here -->
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section fade-in">
+        <h2 class="section-title">SHOWREEL <span>ARCHIVE</span></h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <video loop muted poster="https://res.cloudinary.com/dye5qpwii/image/upload/v1778795822/preview_dzhqvv.webp">
+                    <source src="https://res.cloudinary.com/dye5qpwii/video/upload/v1779052704/Javier_Pardina_10_ay7iai.mp4" type="video/mp4">
+                </video>
+                <div class="video-meta">Neon Racer Concept</div>
+            </div>
+            <div class="video-card">
+                <video loop muted poster="https://res.cloudinary.com/dye5qpwii/image/upload/v1779052645/2153-fireworks-composer_gm3e0h.jpg">
+                    <source src="https://res.cloudinary.com/dye5qpwii/video/upload/v1779052708/AUDI_-_Javier_Pardina_1_gavyon.mp4" type="video/mp4">
+                </video>
+                <div class="video-meta">Visionary Brand Film</div>
+            </div>
+            <div class="video-card">
+                <video loop muted poster="https://res.cloudinary.com/dye5qpwii/image/upload/v1778795799/2024119_20_b94fen.jpg">
+                    <source src="https://res.cloudinary.com/dye5qpwii/video/upload/v1779052732/Javier_Pardina_2_l1mtud.mp4" type="video/mp4">
+                </video>
+                <div class="video-meta">Vintage Motion Piece</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Accounts Section -->
+    <section class="github-section fade-in" id="github">
+        <h2 class="section-title">GITHUB <span>MULTIVERSE</span></h2>
+        <div class="github-grid" id="githubGrid">
+            <div class="github-item">
+                <a href="https://moekyawaung.github.io/" target="_blank">🔗 moekyawaung.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-tech.github.io/" target="_blank">🔗 moekyawaung-tech.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-china.github.io/" target="_blank">🔗 moekyawaung-china.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-developer.github.io/" target="_blank">🔗 moekyawaung-developer.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaungvivov30pro-design.github.io/" target="_blank">🔗 vivov30pro-design.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyaw-aung-mm.github.io/" target="_blank">🔗 moekyaw-aung-mm.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-mk.github.io/" target="_blank">🔗 moekyawaung-mk.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-microsoft.github.io/" target="_blank">🔗 moekyawaung-microsoft.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-cyber.github.io/" target="_blank">🔗 moekyawaung-cyber.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-bangkok.github.io/" target="_blank">🔗 moekyawaung-bangkok.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-micro.github.io/" target="_blank">🔗 moekyawaung-micro.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaungmka2032-boop.github.io/" target="_blank">🔗 mka2032-boop.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-dev-mm.github.io/" target="_blank">🔗 moekyawaung-dev-mm.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyaw-developer.github.io/" target="_blank">🔗 moekyaw-developer.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-hack.github.io/" target="_blank">🔗 moekyawaung-hack.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-graduate.github.io/" target="_blank">🔗 moekyawaung-graduate.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://Moekyawaung-Linux.github.io/" target="_blank">🔗 moekyawaung-linux.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://Moekyawaung-coder.github.io/" target="_blank">🔗 moekyawaung-coder.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-designer.github.io/" target="_blank">🔗 moekyawaung-designer.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://Moekyawaung2026.github.io/" target="_blank">🔗 moekyawaung2026.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaungmka2034-coder.github.io/" target="_blank">🔗 mka2034-coder.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-web.github.io/" target="_blank">🔗 moekyawaung-web.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-creator.github.io/" target="_blank">🔗 moekyawaung-creator.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-webdeveloper.github.io/" target="_blank">🔗 moekyawaung-webdeveloper.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://Moekyawaung-co.github.io/" target="_blank">🔗 moekyawaung-co.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-edu.github.io/" target="_blank">🔗 moekyawaung-edu.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-senior.github.io/" target="_blank">🔗 moekyawaung-senior.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://Moekyawaung-Development.github.io/" target="_blank">🔗 moekyawaung-development.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-google.github.io/" target="_blank">🔗 moekyawaung-google.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://Moe-KyawAung.github.io/" target="_blank">🔗 moe-kyawaung.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://MoeKyawAung-code.github.io/" target="_blank">🔗 moekyawaung-code.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://Moekyawaung-dev.github.io/" target="_blank">🔗 moekyawaung-dev.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://Moekyawaung-cyber.github.io/" target="_blank">🔗 moekyawaung-cyber.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaung-china.github.io/" target="_blank">🔗 moekyawaung-china.github.io</a>
+            </div>
+            <div class="github-item">
+                <a href="https://moekyawaungmka2032-boop.github.io/" target="_blank">🔗 mka2032-boop.github.io</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Section -->
+    <section class="email-section fade-in">
+        <h2 class="section-title">EMAIL <span>ARCHIVE</span></h2>
+        <div class="email-grid" id="emailGrid"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 class="contact-title">CONNECT <span style="color: var(--accent);">OF</span> TIME</h2>
+        <p class="contact-subtitle">Let's build something extraordinary together</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="contact-icon">📱</span>
+                <div class="contact-label">PHONE</div>
+                <div class="contact-value">+95 9 889 000 889</div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">🌐</span>
+                <div class="contact-label">GRAVATAR</div>
+                <div class="contact-value"><a href="https://gravatar.com/moekyawaung2026" target="_blank">View Profile</a></div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">⚡</span>
+                <div class="contact-label">ALTERNATE</div>
+                <div class="contact-value">+959 666 000 050</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social-section fade-in">
+        <h2 class="section-title">SOCIAL <span>ORBIT</span></h2>
+        <div class="social-grid">
+            <a class="social-card" href="https://www.linkedin.com/in/moe-kyaw-aung-2653093a1" target="_blank">
+                <span class="social-icon">💼</span> LinkedIn
+            </a>
+            <a class="social-card" href="https://github.com/Dev-moe-kyawaung" target="_blank">
+                <span class="social-icon">🐙</span> GitHub
+            </a>
+            <a class="social-card" href="https://www.youtube.com/channel/UCuTXUguZb4xjeL2nX8WJG" target="_blank">
+                <span class="social-icon">▶️</span> YouTube
+            </a>
+            <a class="social-card" href="https://www.tumblr.com/moekyawaung" target="_blank">
+                <span class="social-icon">📝</span> Tumblr
+            </a>
+            <a class="social-card" href="https://www.flickr.com/people/204037451@N06" target="_blank">
+                <span class="social-icon">📷</span> Flickr
+            </a>
+            <a class="social-card" href="https://bsky.app/profile/moekyawaung96.bsky.social" target="_blank">
+                <span class="social-icon">🦋</span> Bluesky
+            </a>
+        </div>
+    </section>
+
+    <!-- Lovable Apps Section -->
+    <section class="social-section fade-in" style="background: var(--bg-primary);">
+        <h2 class="section-title">LOVABLE <span>LABS</span></h2>
+        <div class="social-grid" id="lovableGrid"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-title">MK//TimeEngineer</div>
+        <div class="footer-links">
+            <a href="#hero">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#github">GitHub</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-copy">© 2025 <span>Moe Kyaw Aung</span>. All rights reserved. | Time Engineer Portfolio</div>
+    </footer>
+
+    <!-- AI Time Navigator Assistant -->
+    <div class="ai-assistant" id="aiAssistant">
+        <div class="ai-header">
+            <div class="ai-status">
+                <div class="ai-avatar">⏳</div>
+                <div>
+                    <div class="ai-name">CHRONO</div>
+                    <div class="ai-status"><span class="ai-status-dot"></span> ONLINE</div>
+                </div>
+            </div>
+            <span style="font-size:1.2rem; cursor:pointer;" onclick="toggleAI()">✕</span>
+        </div>
+        <div class="ai-chat" id="aiChat">
+            <div class="ai-message bot">👋 Hello! I'm CHRONO, your Time Navigator.</div>
+            <div class="ai-message bot">Ask me anything about my creator, Moe Kyaw Aung's journey!</div>
+        </div>
+        <div class="ai-input-area">
+            <input type="text" class="ai-input" id="aiInput" placeholder="Ask about my timeline..." onkeypress="handleAIEnter(event)">
+            <button class="ai-send" onclick="sendAIMessage()">➤</button>
+        </div>
+    </div>
+
+    <button class="ai-toggle" onclick="toggleAI()">⏳</button>
+
+    <script>
+        // Project Data
+        const projects = [
+            { title: "Social Dashboard", desc: "Complete social media analytics dashboard with real-time updates and beautiful visualizations.", tech: ["React", "Firebase", "Charts"], year: "2024", link: "https://github.com/moekyawaung-tech/social-dashboard" },
+            { title: "PWA App", desc: "Progressive Web App with offline capabilities, push notifications, and installable experience.", tech: ["PWA", "Workbox", "Service Worker"], year: "2024", link: "https://github.com/moekyawaung-tech/pwa-app" },
+            { title: "Admin Dashboard", desc: "Comprehensive admin panel with user management, analytics, and CRUD operations.", tech: ["React", "Node.js", "MongoDB"], year: "2023", link: "#" },
+            { title: "Stock Market", desc: "Real-time stock market tracking with historical trends and portfolio simulator.", tech: ["API", "Chart.js", "Fintech"], year: "2023", link: "#" },
+            { title: "Game Collection", desc: "Collection of classic games reimagined - perfect for casual gaming sessions.", tech: ["JavaScript", "Canvas", "Games"], year: "2024", link: "https://github.com/moekyawaung-tech/game-collection" },
+            { title: "Music Player", desc: "Feature-rich music player with playlists, equalizer, and visualizers.", tech: ["HTML5", "Audio API", "UI/UX"], year: "2023", link: "#" },
+            { title: "Chat App", desc: "Real-time chat application with private messaging, group chats, and voice notes.", tech: ["Socket.io", "React", "Express"], year: "2024", link: "#" },
+            { title: "World Cup", desc: "World Cup tracker with live scores, match schedules, and team statistics.", tech: ["API Integration", "React"], year: "2024", link: "#" },
+            { title: "E-commerce", desc: "Full e-commerce platform with shopping cart, payment gateway, and admin panel.", tech: ["Shopify API", "React Redux"], year: "2023", link: "#" },
+            { title: "Portfolio", desc: "Creative developer portfolio with smooth animations and responsive design.", tech: ["HTML5", "CSS3", "JS"], year: "2023", link: "#" },
+            { title: "Money Tracker", desc: "Personal finance app for expense tracking, budgeting, and financial insights.", tech: ["IndexedDB", "React Native"], year: "2024", link: "#" },
+            { title: "Weather App", desc: "Accurate weather forecasts with 7-day predictions and severe weather alerts.", tech: ["OpenWeather API", "Geolocation"], year: "2023", link: "https://github.com/moekyawaung-tech/Weather-app" },
+            { title: "Crypto Tracker", desc: "Cryptocurrency portfolio tracker with price alerts and market analysis.", tech: ["Blockchain API", "WebSocket"], year: "2024", link: "#" },
+            { title: "Todo App", desc: "Productivity tool with task management, reminders, and progress tracking.", tech: ["Vanilla JS", "LocalStorage"], year: "2023", link: "https://github.com/moekyawaung-tech/javascript-todo" },
+            { title: "Video Player", desc: "Advanced video player with custom controls, playlists, and playback speed.", tech: ["HTML5 Video", "Custom UI"], year: "2023", link: "https://github.com/moekyawaung-tech/video-player" },
+            { title: "Job Portal", desc: "Job portal with recruiters, job seekers, and resume builder integrated.", tech: ["MERN Stack", "Auth"], year: "2024", link: "https://github.com/moekyawaung-tech/Job-Portal-App" },
+            { title: "POS System", desc: "Complete Point of Sale system with inventory, billing, and recepit generation.", tech: ["React Native", "SQLite"], year: "2024", link: "https://github.com/moekyawaung-tech/POS-Full-Version" },
+            { title: "Advance POS", desc: "Advanced POS with multi-store support, discounts, and customer loyalty.", tech: ["Vue.js", "Node.js", "MySQL"], year: "2024", link: "https://github.com/moekyawaung-tech/Advance-POS-Version" },
+            { title: "POS Ultimate", desc: "Ultimate POS solution with cloud sync, tax invoice, and analytics.", tech: ["React", "GraphQL"], year: "2025", link: "https://github.com/moekyawaung-tech/POS-Ultimate-Version" },
+            { title: "POS Pro Max", desc: "State-of-the-art POS with AI-powered insights and omnichannel support.", tech: ["Next.js", "AI/ML"], year: "2025", link: "https://github.com/moekyawaung-tech/POS-Ultimate-Pro-Max" },
+            { title: "My Postcode", desc: "Global postcode search and validation system with beautiful UI.", tech: ["API", "Autocomplete"], year: "2023", link: "https://github.com/Moekyawaung-cyber/My_postcode-My-web_project" },
+            { title: "Hospital Lists", desc: "Comprehensive hospital directory with location tracking and services.", tech: ["React", "Maps API"], year: "2023", link: "https://github.com/Moekyawaung-cyber/Hospital-Lists" },
+            { title: "Thailand Travel", desc: "Travel guide for Thailand with attractions, hotels, and itinerary builder.", tech: ["MERN", "Booking API"], year: "2023", link: "https://github.com/moekyawaung-tech/thailand-travel" },
+            { title: "Snake Game", desc: "Classic Snake game with modern graphics and progressive difficulty.", tech: ["Canvas", "Game Loop"], year: "2024", link: "https://github.com/moekyawaung-tech/Snake-Game-App" },
+            { title: "Casino App", desc: "Virtual casino experience with slot machines, poker, and card games.", tech: ["Random", "UI/UX"], year: "2024", link: "https://github.com/moekyawaung-tech/casino-app" },
+            { title: "Daily Planner", desc: "Daily planning tool with calendar integration, reminders, and tasks.", tech: ["PWA", "Offline"], year: "2023", link: "https://github.com/moekyawaung-tech/Daily-planner-app" },
+            { title: "Lens Lite", desc: "Photo editing app with filters, effects, and share capabilities.", tech: ["Canvas", "WebGL"], year: "2024", link: "https://github.com/moekyawaung-tech/Lens-lite" },
+            { title: "Restaurant Finder", desc: "Restaurant discovery app with reviews, ratings, and recommendations.", tech: ["Yelp API", "Geocoding"], year: "2024", link: "#" },
+            { title: "Fitness Tracker", desc: "Workout tracking with progress graphs, goals, and social sharing.", tech: ["Health API", "Charts"], year: "2024", link: "#" },
+            { title: "News Aggregator", desc: "Real-time news aggregator with personalization and trend analysis.", tech: ["RSS", "NLP"], year: "2024", link: "#" },
+        ];
+
+        // Emails
+        const emails = [
+            "moekyawaung@programmer.net", "moekyawaung@collector.org", "moekyawaung@technologist.com",
+            "moekyawaung@techie.com", "moekyawaung@graphic-designer.com", "moekyawaung@cybergal.com",
+            "moekyawaung@webname.com", "moekyawaung@hackermail.com", "moekyawaung@graduate.org",
+            "moekyawaung@engineer.com", "moekyawaung@asia.com", "moekyawaung@contractor.net",
+            "moekyawaung@linuxmail.org", "moekyawaung@usa.com", "moekyawaung@europe.com",
+            "moekyawaung@mail.com", "moekyawaung@iname.com", "moekyawaung@socialogist.com",
+            "moekyawaung@secretary.net", "moekyawaung@publicist.com"
+        ];
+
+        // Lovable Apps
+        const lovableApps = [
+            "https://happy-cv-creator.lovable.app", "https://moekyawaung.lovable.app", "https://moekyawaungmybio.lovable.app",
+            "https://the-cv-palette.lovable.app", "https://moekyaw-url.lovable.app", "https://moekyawaung-dev.lovable.app",
+            "https://moe-kyaw-aung.lovable.app", "https://moekyawaungmka.lovable.app", "https://moekyaw.lovable.app",
+            "https://m-moekyaw.lovable.app", "https://dev-moekyawaung.lovable.app", "https://dev-moekyaw.lovable.app",
+            "https://cv-beacon.lovable.app", "https://moekyawaungmkamka.lovable.app", "https://pixel-perfect-snap-39.lovable.app",
+            "https://devmoekyaw.lovable.app", "https://profile-persuasion-hub.lovable.app", "https://friendly-haven-io.lovable.app",
+            "https://moekyawaung-github.lovable.app", "https://moekyawgithub.lovable.app", "https://joy-codify-life.lovable.app",
+            "https://mmoekyaw.lovable.app", "https://color-code-chronicles.lovable.app", "https://moekyawaung-free.lovable.app",
+            "https://app-skill-gallery.lovable.app", "https://spark-coach-create.lovable.app", "https://moekyaw-mk.lovable.app",
+            "https://moekyawaung-myanmar.lovable.app", "https://mmoe.lovable.app"
+        ];
+
+        // GitHub Repos (Featured)
+        const featuredRepos = [
+            { name: "video-player", url: "https://github.com/moekyawaung-tech/video-player" },
+            { name: "social-dashboard", url: "https://github.com/moekyawaung-tech/social-dashboard" },
+            { name: "game-collection", url: "https://github.com/moekyawaung-tech/game-collection" },
+            { name: "pwa-app", url: "https://github.com/moekyawaung-tech/pwa-app" },
+            { name: "Job-Portal-App", url: "https://github.com/moekyawaung-tech/Job-Portal-App" }
+        ];
+
+        // Initialize Page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjects();
+            loadEmails();
+            loadLovables();
+            initScrollFade();
+            initVideoHover();
+
+            // Observer for fade-in animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+
+        // Load Projects
+        function loadProjects() {
+            const grid = document.getElementById('capsuleGrid');
+            grid.innerHTML = projects.map(project => `
+                <div class="time-capsule" onclick="openCapsule(this)" data-title="\${project.title}">
+                    <span class="capsule-year">⌛ \${project.year}</span>
+                    <span class="capsule-icon">🚀</span>
+                    <h3 class="capsule-title">\${project.title}</h3>
+                    <p class="capsule-desc">\${project.desc}</p>
+                    <div class="timeline-tech">
+                        \${project.tech.map(t => `<span class="tech-tag">\${t}</span>`).join('')}
+                    </div>
+                    <div class="capsule-links">
+                        <a href="\${project.link}" target="_blank" onclick="event.stopPropagation();">🔗 View Code</a>
+                        <a href="#" onclick="event.stopPropagation();">▶ Live Demo</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load Emails
+        function loadEmails() {
+            const grid = document.getElementById('emailGrid');
+            grid.innerHTML = emails.map(email => `
+                <div class="email-item">
+                    <a href="mailto:\${email}">✉️ \${email}</a>
+                </div>
+            `).join('');
+        }
+
+        // Load Lovable Apps
+        function loadLovables() {
+            const grid = document.getElementById('lovableGrid');
+            grid.innerHTML = lovableApps.slice(0, 15).map(app => `
+                <a class="social-card" href="\${app}" target="_blank" style="max-width: 250px;">
+                    <span class="social-icon">💜</span> \${app.replace('https://', '').replace('.lovable.app', '').replace(/^\d+\./, '')}
+                </a>
+            `).join('');
+        }
+
+        // Open Capsule (Ripple Effect)
+        function openCapsule(element) {
+            const rect = element.getBoundingClientRect();
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple-effect';
+            ripple.style.left = (rect.width / 2) + 'px';
+            ripple.style.top = (rect.height / 2) + 'px';
+            element.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+            alert(`Opening time capsule: \${element.dataset.title || element.querySelector('.capsule-title').textContent}...`);
+        }
+
+        // Scroll Fade In
+        function initScrollFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+            fadeElements.forEach(el => observer.observe(el));
+        }
+
+        // Video Hover Play
+        function initVideoHover() {
+            document.querySelectorAll('.video-card video').forEach(video => {
+                video.addEventListener('mouseenter', () => video.play());
+                video.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            });
+        }
+
+        // AI Assistant Logic
+        function toggleAI() {
+            const assistant = document.getElementById('aiAssistant');
+            assistant.classList.toggle('open');
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const chat = document.getElementById('aiChat');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            chat.innerHTML += `<div class="ai-message user">\${message}</div>`;
+            input.value = '';
+            
+            setTimeout(() => {
+                const response = getAIResponse(message);
+                chat.innerHTML += `<div class="ai-message bot">\${response}</div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 500);
+            
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        function handleAIEnter(e) {
+            if (e.key === 'Enter') sendAIMessage();
+        }
+
+        function getAIResponse(question) {
+            const q = question.toLowerCase();
+            
+            if (q.includes('hello') || q.includes('hi')) {
+                return "Hello traveler! 🕐 Ready to explore Moe's development journey through time?";
+            } else if (q.includes('project') || q.includes('work')) {
+                return "Moe has built over 30 projects including POS systems, social dashboards, PWA apps, game collections, and much more! But wait... it's tedious to type them all. Just scroll below and witness this vast portfolio chronologically arranged. 🚀";
+            } else if (q.includes('skill') || q.includes('tech')) {
+                return "Moe's arsenal includes JavaScript, React, Node.js, MongoDB, and much more! Also, this portfolio itself demonstrates advanced UI/UX skills with time-themed animations, dynamic chronograph rings, and responsive design. See those capsules just down the timeline for more technical depth. 🔧";
+            } else if (q.includes('contact') || q.includes('email')) {
+                return "You can reach Moe at +95 9 889 000 889, or via his official linked profiles below. He also has an impressive collection of emails you can find in the Email Archive section above! ✉️";
+            } else if (q.includes('github') || q.includes('git')) {
+                return "Moe has footprints across the GitHub multiverse - check out the GitHub Multiverse section above! You'll see dozens of accounts and repositories spanning his various niches and experiments. 🐱";
+            } else if (q.includes('pwa') || q.includes('progressive')) {
+                return "Yes! Moe has developed sophisticated Progressive Web Apps using modern APIs like Service Workers and IndexedDB for offline capabilities, installability, and lightning-fast user experiences! Check out moekyawaung-tech/pwa-app. ⚡";
+            } else if (q.includes('pos') || q.includes('point of sale')) {
+                return "Moe has crafted multiple generations of POS systems - from basic to Ultimate Pro Max versions! These include features like inventory management, billing systems, multi-store support, and even AI-powered insights. Impressive, right? 🏪";
+            } else if (q.includes('troubleshoot') || q.includes('help') || q.includes('error')) {
+                return "As a time navigator, I can help you understand Moe's timeline, but something about technology? Let me just say that specific details require diving deep into time - which is precisely why each project section here is a clickable time capsule! ⏳";
+            } else if (q.includes('email') || q.includes('contact')) {
+                return "You can reach Moe at his main email: moekyawaung@programmer.net. For a complete list, check out the email archive above - there are over 20 ways to connect! ✉️";
+            } else if (q.includes('social') || q.includes('linkedin') || q.includes('youtube')) {
+                return "Moe maintains profiles on LinkedIn, YouTube, Tumblr, Flickr, Bluesky, and more! Check out the Social Orbit section above to explore his digital social universe. 📱";
+            } else if (q.includes('gaming') || q.includes('game')) {
+                return "Moe has built an entertaining game collection including classic Snake, a casino app, and many more! Visit the game-collection repository for a blast to the past! 🎮";
+            } else if (q.includes('time') || q.includes('temporal') || q.includes('portal')) {
+                return "Ah, you're intrigued by the temporal aspect! This portfolio itself is a certified time machine, isn't it? The chronograph rings, the ripples on time capsules, the animated watch faces... all point to engineering excellence that creates memorable digital experiences. 🕰️";
+            } else {
+                return "Great question! While I'm excellent at guiding through time, I could use a hint. Ask about projects, skills, contact methods, or explore the sections above to experience Moe's time-engineered universe! ✨";
+            }
+        }
+
+        // Watch Face Number Increment (Just for Demo - set to actual values)
+        window.addEventListener('load', () => {
+            // You can animate to actual numbers here
+            // For now they are static with + suffix
+        });
+    </script>
+</body>
+</html>
