@@ -1,0 +1,32 @@
+{
+    "name": "Moe Kyaw Aung - Time Engineer Portfolio",
+    "short_name": "MKA Portfolio",
+    "description": "A journey through time-engineered projects and innovations",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a12",
+    "theme_color": "#00f0ff",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "https://res.cloudinary.com/dye5qpwii/image/upload/v1778763531/MKA_25_lbx6fb.webp",
+            "sizes": "192x192",
+            "type": "image/webp"
+        },
+        {
+            "src": "https://res.cloudinary.com/dye5qpwii/image/upload/v1778763531/MKA_25_lbx6fb.webp",
+            "sizes": "512x512",
+            "type": "image/webp"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Projects",
+            "url": "/#projects"
+        },
+        {
+            "name": "Contact",
+            "url": "/#contact"
+        }
+    ]
+}
