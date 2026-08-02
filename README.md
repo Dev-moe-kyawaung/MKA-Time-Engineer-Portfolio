@@ -50,14 +50,15 @@ cd time-engineer-portfolio
 Local Development
 # Install any local server (e.g., Live Server in VSCode)
 # Or use Python
-python -m http.server 8000
-Deploy to GitHub Pages
-Create a new repository on GitHub
-Push all files to the main branch
-Go to repository Settings → Pages
-Select “Deploy from branch” → main → /root
+# python -m http.server 8000
+# Deploy to GitHub Pages
+# Create a new repository on GitHub
+# Push all files to the main branch
+  Go to repository Settings → Pages
+# Select “Deploy from branch” → main → /root
 Click Save
-Your portfolio will be live at: https://YOUR_USERNAME.github.io/time-engineer-portfolio/
+#  Your portfolio will be live at: https://YOUR_USERNAME.github.io/time-engineer-portfolio/
+```
 📂 Project Structure
 time-engineer-portfolio/
 ├── index.html
@@ -109,16 +110,16 @@ Flickr
 Bluesky
 📈 GitHub Accounts Collection
 Over 30 GitHub accounts spanning different niches:
-
-moekyawaung
-moekyawaung-tech
-Dev-moe-kyawaung … and more!
-🏆 Achievements
-✅ 30+ production-ready applications
-✅ 5+ years of development experience
-✅ Multiple POS system versions
-✅ PWA expertise
-✅ Full-stack proficiency
+```
+# moekyawaung
+# moekyawaung-tech
+# Dev-moe-kyawaung … and more!
+# 🏆 Achievements
+# ✅ 30+ production-ready applications
+# ✅ 5+ years of development experience
+# ✅ Multiple POS system versions
+# ✅ PWA expertise
+# ✅ Full-stack proficiency
 📄 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
