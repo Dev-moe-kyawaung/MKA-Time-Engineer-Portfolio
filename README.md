@@ -46,3 +46,88 @@ A stunning, interactive portfolio website themed around **time engineering**. Th
 ```bash
 git clone https://github.com/Dev-moe-kyawaung/time-engineer-portfolio.git
 cd time-engineer-portfolio
+```
+Local Development
+# Install any local server (e.g., Live Server in VSCode)
+# Or use Python
+python -m http.server 8000
+Deploy to GitHub Pages
+Create a new repository on GitHub
+Push all files to the main branch
+Go to repository Settings → Pages
+Select “Deploy from branch” → main → /root
+Click Save
+Your portfolio will be live at: https://YOUR_USERNAME.github.io/time-engineer-portfolio/
+📂 Project Structure
+time-engineer-portfolio/
+├── index.html
+├── README.md
+├── LICENSE
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   ├── main.js
+│   │   ├── projects.js
+│   │   ├── timeline.js
+│   │   └── ai-assistant.js
+│   ├── images/
+│   └── data/
+│       ├── projects.json
+│       ├── emails.json
+│       └── github-accounts.json
+└── _config.yml
+📱 Responsive Design
+✅ Mobile-friendly (320px+)
+✅ Tablet optimized (768px)
+✅ Desktop experience (1024px+)
+✅ PWA-ready with manifest.json
+✅ AI-powered interactions
+🎮 Key Projects
+POS System Versions
+POS Full Version
+Advance POS
+POS Ultimate
+POS Pro Max
+Web Applications
+Video Player
+Social Dashboard
+Game Collection
+PWA App
+Job Portal
+📧 Contact
+Main Email: moekyawaung@programmer.net
+Phone: +95 9 889 000 889
+Alternate: +959 666 000 050
+Gravatar: moekyawaung2026
+🤝 Social Links
+GitHub
+LinkedIn
+YouTube
+Tumblr
+Flickr
+Bluesky
+📈 GitHub Accounts Collection
+Over 30 GitHub accounts spanning different niches:
+
+moekyawaung
+moekyawaung-tech
+Dev-moe-kyawaung … and more!
+🏆 Achievements
+✅ 30+ production-ready applications
+✅ 5+ years of development experience
+✅ Multiple POS system versions
+✅ PWA expertise
+✅ Full-stack proficiency
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+🙏 Credits
+Platform: GitHub Pages
+Images: Cloudinary
+Videos: Cloudinary CDN
+Icons: Font Awesome
+Fonts: Google Fonts
+Made with ⏰ and 💖 by Moe Kyaw Aung
+
+© 2025 Moe Kyaw Aung. All Rights Reserved
