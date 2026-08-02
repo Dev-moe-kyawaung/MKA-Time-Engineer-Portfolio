@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moe Kyaw Aung | Time Engineer Portfolio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Moe Kyaw Aung - Time Engineer, Full-Stack Developer, and Creative Coder from Myanmar. Explore 30+ projects including POS systems, PWA apps, and more.">
+    <meta name="keywords" content="Moe Kyaw Aung, developer, portfolio, full-stack, PWA, React, Node.js, POS system, Myanmar">
+    <meta name="author" content="Moe Kyaw Aung">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Moe Kyaw Aung | Time Engineer Portfolio">
+    <meta property="og:description" content="Explore my journey through time-engineered projects and innovative solutions.">
+    <meta property="og:image" content="https://res.cloudinary.com/dye5qpwii/image/upload/v1778527878/IMG_20260430_053105_uef0yr.png">
+    <meta property="og:url" content="https://YOUR_USERNAME.github.io/time-engineer-portfolio/">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Moe Kyaw Aung | Time Engineer">
+    <meta name="twitter:description" content="Full-Stack Developer Portfolio with 30+ projects">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dye5qpwii/image/upload/v1778527878/IMG_20260430_053105_uef0yr.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dye5qpwii/image/upload/v1778763531/MKA_25_lbx6fb.webp">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-ring">
+            <div class="loader-ring-inner"></div>
+        </div>
+        <div class="loader-text">ENTERING TIME ENGINE...</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="time-navigation" id="mainNav">
+        <div class="nav-brand" onclick="scrollToSection('hero')">
+            <span class="brand-icon">⏰</span> MK//TimeEngineer
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero" class="nav-link active">Home</a></li>
+            <li><a href="#timeline" class="nav-link">Timeline</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#github" class="nav-link">GitHub</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero section" id="hero">
+        <div class="hero-glow"></div>
+        <div class="chronograph-ring hero-ring-1"></div>
+        <div class="chronograph-ring hero-ring-2"></div>
+        
+        <div class="hero-content">
+            <div class="profile-avatar">
+                <img src="https://res.cloudinary.com/dye5qpwii/image/upload/v1778747388/image-1_1_khsx9s.png" alt="Moe Kyaw Aung Profile">
+            </div>
+            
+            <h1 class="hero-title">Moe Kyaw Aung</h1>
+            <p class="hero-subtitle">TIME ENGINEER • FULL-STACK DEVELOPER • CREATIVE CODER</p>
+            
+            <div class="hero-typewriter">
+                <span id="typed-text"></span><span class="cursor">|</span>
+            </div>
+            
+            <div class="hero-cta">
+                <a href="#projects" class="btn-primary">View Time Capsules</a>
+                <a href="#contact" class="btn-secondary">Contact Me</a>
+            </div>
+            
+            <div class="hero-social">
+                <a href="https://github.com/Dev-moe-kyawaung" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/moe-kyaw-aung-2653093a1" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/channel/UCuTXUguZb4xjeL2nX8WJG" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tumblr.com/moekyawaung" target="_blank"><i class="fab fa-tumblr"></i></a>
+                <a href="https://www.flickr.com/people/204037451@N06" target="_blank"><i class="fab fa-flickr"></i></a>
+                <a href="https://bsky.app/profile/moekyawaung96.bsky.social" target="_blank"><i class="fab fa-bluesky"></i></a>
+            </div>
+        </div>
+
+        <!-- Chronograph Watches -->
+        <div class="chronograph-display">
+            <div class="watch">
+                <div class="watch-inner">
+                    <div class="watch-digit" data-target="5">0</div>
+                    <div class="watch-label">YEARS</div>
+                </div>
+                <div class="watch-hand"></div>
+            </div>
+            <div class="watch">
+                <div class="watch-inner">
+                    <div class="watch-digit" data-target="30">0</div>
+                    <div class="watch-label">PROJECTS</div>
+                </div>
+                <div class="watch-hand" style="animation-duration: 0.5s;"></div>
+            </div>
+            <div class="watch">
+                <div class="watch-inner">
+                    <div class="watch-digit" data-target="15">0</div>
+                    <div class="watch-label">TECH STACKS</div>
+                </div>
+                <div class="watch-hand" style="animation-duration: 2s;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+        <h2 class="section-title">TECHNOLOGY <span>CAPSULES</span></h2>
+        <div class="skills-container" id="skillsContainer">
+            <!-- Skills loaded from JS -->
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section section fade-in" id="timeline">
+        <h2 class="section-title">DEVELOPER <span>TIMELINE</span></h2>
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            <!-- Timeline items loaded from JS -->
+        </div>
+    </section>
+
+    <!-- Projects Time Capsules Section -->
+    <section class="projects-section section" id="projects">
+        <h2 class="section-title">TIME <span>CAPSULES</span></h2>
+        <div class="capsule-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="app">App</button>
+            <button class="filter-btn" data-filter="game">Games</button>
+            <button class="filter-btn" data-filter="ai">AI/ML</button>
+            <button class="filter-btn" data-filter="pos">POS</button>
+        </div>
+        <div class="capsule-grid" id="capsuleGrid">
+            <!-- Projects loaded from JS -->
+        </div>
+    </section>
+
+    <!-- Video Showcase -->
+    <section class="video-section section fade-in">
+        <h2 class="section-title">SHOWREEL <span>ARCHIVE</span></h2>
+        <div class="video-grid" id="videoGrid">
+            <div class="video-card">
+                <video loop muted poster="https://res.cloudinary.com/dye5qpwii/image/upload/v1778795822/preview_dzhqvv.webp">
+                    <source src="https://res.cloudinary.com/dye5qpwii/video/upload/v1779052704/Javier_Pardina_10_ay7iai.mp4" type="video/mp4">
+                </video>
+                <div class="video-meta">Neon Racer Concept</div>
+            </div>
+            <div class="video-card">
+                <video loop muted poster="https://res.cloudinary.com/dye5qpwii/image/upload/v1779052645/2153-fireworks-composer_gm3e0h.jpg">
+                    <source src="https://res.cloudinary.com/dye5qpwii/video/upload/v1779052708/AUDI_-_Javier_Pardina_1_gavyon.mp4" type="video/mp4">
+                </video>
+                <div class="video-meta">Visionary Brand Film</div>
+            </div>
+            <div class="video-card">
+                <video loop muted poster="https://res.cloudinary.com/dye5qpwii/image/upload/v1778795799/2024119_20_b94fen.jpg">
+                    <source src="https://res.cloudinary.com/dye5qpwii/video/upload/v1779052732/Javier_Pardina_2_l1mtud.mp4" type="video/mp4">
+                </video>
+                <div class="video-meta">Vintage Motion Piece</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Accounts Section -->
+    <section class="github-section section fade-in" id="github">
+        <h2 class="section-title">GITHUB <span>MULTIVERSE</span></h2>
+        <div class="github-grid" id="githubGrid">
+            <!-- GitHub accounts loaded from JS -->
+        </div>
+    </section>
+
+    <!-- Lovable Apps Section -->
+    <section class="lovable-section section fade-in" id="lovable">
+        <h2 class="section-title">LOVABLE <span>LABS</span></h2>
+        <div class="lovable-grid" id="lovableGrid">
+            <!-- Lovable apps loaded from JS -->
+        </div>
+    </section>
+
+    <!-- Email Section -->
+    <section class="email-section section fade-in" id="emails">
+        <h2 class="section-title">EMAIL <span>ARCHIVE</span></h2>
+        <div class="email-grid" id="emailGrid">
+            <!-- Emails loaded from JS -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section section" id="contact">
+        <div class="contact-wrapper">
+            <h2 class="contact-title">CONNECT <span>ACROSS TIME</span></h2>
+            <p class="contact-subtitle">Ready to build something extraordinary? Let's sync our timelines.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon"><i class="fas fa-phone"></i></span>
+                    <div class="contact-label">PHONE</div>
+                    <div class="contact-value">+95 9 889 000 889</div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon"><i class="fas fa-mobile-alt"></i></span>
+                    <div class="contact-label">ALTERNATE</div>
+                    <div class="contact-value">+959 666 000 050</div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon"><i class="fas fa-globe"></i></span>
+                    <div class="contact-label">GRAVATAR</div>
+                    <div class="contact-value"><a href="https://gravatar.com/moekyawaung2026" target="_blank">View Profile</a></div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                    <div class="contact-label">EMAIL</div>
+                    <div class="contact-value"><a href="mailto:moekyawaung@programmer.net">moekyawaung@programmer.net</a></div>
+                </div>
+            </div>
+            
+            <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Tell me about your project..." rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send Through Time</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-title">MK//TimeEngineer</div>
+            <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#projects">Projects</a>
+                <a href="#github">GitHub</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/Dev-moe-kyawaung" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/moe-kyaw-aung-2653093a1" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/channel/UCuTXUguZb4xjeL2nX8WJG" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 <span>Moe Kyaw Aung</span>. All rights reserved.</p>
+            <p>Crafted with <i class="fas fa-heart"></i> and time circuits</p>
+        </div>
+    </footer>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant" id="aiAssistant">
+        <div class="ai-header">
+            <div class="ai-avatar">⏳</div>
+            <div class="ai-info">
+                <div class="ai-name">CHRONO</div>
+                <div class="ai-status"><span class="ai-status-dot"></span> ONLINE</div>
+            </div>
+            <button class="ai-close" onclick="toggleAI()">✕</button>
+        </div>
+        <div class="ai-chat" id="aiChat">
+            <div class="ai-message bot">👋 Hello! I'm CHRONO, your Time Navigator.</div>
+            <div class="ai-message bot">Ask me anything about Moe's journey through development!</div>
+        </div>
+        <div class="ai-input-area">
+            <input type="text" class="ai-input" id="aiInput" placeholder="Ask about projects, skills, contact..." onkeypress="handleAIEnter(event)">
+            <button class="ai-send" onclick="sendAIMessage()">➤</button>
+        </div>
+    </div>
+
+    <button class="ai-toggle" onclick="toggleAI()">⏳</button>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" onclick="scrollToSection('hero')">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="assets/js/projects.js"></script>
+    <script src="assets/js/timeline.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ai-assistant.js"></script>
+</body>
+</html>
