@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://YOUR_USERNAME.github.io/time-engineer-portfolio/sitemap.xml
