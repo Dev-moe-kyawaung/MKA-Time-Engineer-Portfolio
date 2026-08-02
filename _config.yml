@@ -1,0 +1,25 @@
+# Site Settings
+title: Moe Kyaw Aung | Time Engineer
+author: Moe Kyaw Aung
+description: >- # this means to ignore newlines until "baseurl:"
+  Full-Stack Developer and Time Engineer portfolio. 
+  Explore 30+ projects, 30 GitHub accounts, and a journey through 
+  technological evolution.
+baseurl: "/time-engineer-portfolio" # the subpath of your site, e.g. /blog
+url: "https://Dev-moe-kyawaung.github.io" # the base hostname & protocol for your site
+
+# Build Settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+
+# Exclude
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
